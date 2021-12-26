@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:my_shop/screens/product_details_screen.dart';
 
-class Products extends StatelessWidget {
+class ProductItem extends StatelessWidget {
   final String title;
   final double price;
   final String imageUrl;
-  const Products({
+  final String id;
+  const ProductItem({
     Key? key,
     required this.title,
     required this.price,
     required this.imageUrl,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -16,9 +19,15 @@ class Products extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.cover,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, ProductDetailsScreen.routeName,
+                arguments: id);
+          },
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
+          ),
         ),
         header: GridTileBar(
           //backgroundColor: Colors.black38,
@@ -40,8 +49,8 @@ class Products extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
           ),
-          trailing:
-              IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+          trailing: IconButton(
+              onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
         ),
       ),
     );
