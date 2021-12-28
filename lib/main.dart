@@ -21,11 +21,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Lato',
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.teal)
-              .copyWith(secondary: Colors.amber),
+              .copyWith(secondary: Colors.red),
         ),
-        home: ProductOverviewScreen(),
+        home: const ProductOverviewScreen(),
         routes: {
-          ProductDetailsScreen.routeName: (ctx) => ProductDetailsScreen()
+          ProductDetailsScreen.routeName: (ctx) => const ProductDetailsScreen()
         },
       ),
     );

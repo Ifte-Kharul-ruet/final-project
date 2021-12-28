@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/products_grid.dart';
 
 class ProductOverviewScreen extends StatelessWidget {
-  ProductOverviewScreen({Key? key}) : super(key: key);
+  const ProductOverviewScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class ProductOverviewScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('CodEnity Shop'),
       ),
-      body: ProductsGrid(),
+      body: const ProductsGrid(),
     );
   }
 }
