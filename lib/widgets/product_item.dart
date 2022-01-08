@@ -61,10 +61,12 @@ class ProductItem extends StatelessWidget {
           ),
           trailing: IconButton(
               onPressed: () {
-                cart.addItem(
-                    productId: product.id,
-                    price: product.price,
-                    title: product.title);
+                if (product.id != null) {
+                  cart.addItem(
+                      productId: product.id,
+                      price: product.price,
+                      title: product.title);
+                }
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: const Text('Added Item to Cart!'),
@@ -74,7 +76,9 @@ class ProductItem extends StatelessWidget {
                   action: SnackBarAction(
                       label: 'Undo',
                       onPressed: () {
-                        cart.removeSingleItem(product.id);
+                        if (product.id != null) {
+                          cart.removeSingleItem(product.id);
+                        }
                       }),
                 ));
               },
