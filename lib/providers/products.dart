@@ -66,15 +66,37 @@ class Products with ChangeNotifier {
     return items.firstWhere((prod) => prod.id == id);
   }
 
-  void addProduct(Product product) async {
-    final newProduct = Product(
-        id: DateTime.now().toString(),
-        title: product.title,
-        description: product.description,
-        price: product.price,
-        imageUrl: product.imageUrl);
-    _items.add(newProduct);
-    notifyListeners();
+  Future<void> addProduct(Product product) {
+    const stringData =
+        'https://final-project-flutter-7269a-default-rtdb.firebaseio.com/products.json';
+    final url = Uri.parse(stringData);
+
+    return http
+        .post(
+      url,
+      body: json.encode({
+        'title': product.title,
+        'description': product.description,
+        'price': product.price,
+        'imageUrl': product.imageUrl
+      }),
+    )
+        .then((response) {
+      //print(response.body);
+      final newProduct = Product(
+          id: json.decode(response.body)['name'],
+          title: product.title,
+          description: product.description,
+          price: product.price,
+          imageUrl: product.imageUrl);
+      _items.add(newProduct);
+      notifyListeners();
+    }).catchError((error) {
+      print(error);
+      throw error;
+    });
+
+    //print(response.statusCode);
   }
 
   void updateProducts(String? id, Product newProduct) {
